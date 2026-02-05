@@ -8,9 +8,7 @@ phases:
   pre_build:
     commands:
       - echo Logging in to ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin $ECR_REPO
-      - git clone https://github.com/frappe/frappe_docker.git
-      - cd frappe_docker
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 083314012763.dkr.ecr.us-east-1.amazonaws.com
 
   build:
     commands:
@@ -23,11 +21,10 @@ phases:
           --build-arg NODE_VERSION=18.18.2 \
           --platform linux/amd64 \
           -f images/production/Containerfile \
-          -t $ECR_REPO:v15 \
-          -t $ECR_REPO:latest \
+          -t 083314012763.dkr.ecr.us-east-1.amazonaws.com/erpnext-prod-erpnext:v15 \
+          -t 083314012763.dkr.ecr.us-east-1.amazonaws.com/erpnext-prod-erpnext:latest \
           .
 
   post_build:
     commands:
       - docker push $ECR_REPO:v15
-      - docker push $ECR_REPO:latest
