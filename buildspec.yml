@@ -2,13 +2,13 @@ version: 0.2
 
 env:
   variables:
-    ECR_REPO: "083314012763.dkr.ecr.us-east-1.amazonaws.com/erpnext-prod-erpnext"
+    ECR_REPO: "083314012763.dkr.ecr.me-south-1.amazonaws.com/erpnext-prod-erpnext"
 
 phases:
   pre_build:
     commands:
       - echo Logging in to ECR...
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 083314012763.dkr.ecr.us-east-1.amazonaws.com
+      - aws ecr get-login-password --region me-south-1 | docker login --username AWS --password-stdin 083314012763.dkr.ecr.me-south-1.amazonaws.com
 
   build:
     commands:
@@ -21,8 +21,8 @@ phases:
           --build-arg NODE_VERSION=18.18.2 \
           --platform linux/amd64 \
           -f images/production/Containerfile \
-          -t 083314012763.dkr.ecr.us-east-1.amazonaws.com/erpnext-prod-erpnext:v15 \
-          -t 083314012763.dkr.ecr.us-east-1.amazonaws.com/erpnext-prod-erpnext:latest \
+          -t 083314012763.dkr.ecr.me-south-1.amazonaws.com/erpnext-prod-erpnext:v15 \
+          -t 083314012763.dkr.ecr.me-south-1.amazonaws.com/erpnext-prod-erpnext:latest \
           .
 
   post_build:
