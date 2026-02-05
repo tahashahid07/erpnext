@@ -12,7 +12,6 @@ phases:
 
   build:
     commands:
-      - cd frappe_docker
       - |
         docker build \
           --build-arg FRAPPE_BRANCH=version-15 \
